@@ -11,11 +11,15 @@ class window.AppView extends Backbone.View
   events:
     "click .hit-button": -> @model.get('playerHand').hit()
     "click .stand-button": -> @model.get('playerHand').stand()
-    "click .new-game-button": -> @trigger 'newGame'
+    "click .new-game-button": -> @newGame()
 
   initialize: -> 
     @render()
     @model.on 'gameOver', @render, @
+
+  newGame: ->
+    @model.trigger 'newGame'
+    @render()
 
   render: ->
     @$el.children().detach()

@@ -6,15 +6,15 @@ class window.Hand extends Backbone.Collection
 
   hit: -> 
     limit = if @isDealer then 17 else 20
-    if @scores()[0] <= limit
+    if @scores() <= limit
       @add(@deck.pop()).last() 
       addedCard = true
-    @trigger 'busted' if @scores()[0] > 21 && addedCard
+    @trigger 'busted' if @scores() > 21 && addedCard
     @last
 
   dealerHit: ->
-    @hit() until @scores()[0] >= 17
-    if @scores()[0] > 21 
+    @hit() until @scores() >= 17
+    if @scores() > 21 
     then @trigger 'dealerBust' 
     else @trigger 'dealerDone'
 
@@ -31,4 +31,4 @@ class window.Hand extends Backbone.Collection
     score = @reduce (score, card) ->
       score + if card.get 'revealed' then card.get 'value' else 0
     , 0
-    if hasAce && score+10<21 then [score + 10] else [score]
+    if hasAce && score+10<21 then score else score
