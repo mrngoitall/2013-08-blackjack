@@ -13,7 +13,7 @@ class window.App extends Backbone.Model
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
-    @set 'status', 'Make. Your. Move.'
+    @set 'status', "Make your move already! We don't have all day!"
     @get('playerHand').on('stand',@stand,@)
     @get('playerHand').on('busted',@busted,@)
     @get('dealerHand').on('dealerBust',@dealerBust,@)

@@ -9,6 +9,8 @@ body {
   border-radius: 5px;
   height: 140px;
   margin-right: 20px;
+  background-size: 100px 140px;
+  background-image: url('../lib/cards/back.png')
 }
 
 .covered {
