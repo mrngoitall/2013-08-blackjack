@@ -14,4 +14,9 @@ class window.App extends Backbone.Model
      @get('dealerHand').on('dealerbust',
       -> if @get('playerHand').scores()[0] <= 21
            @trigger 'dealerbust'
-    , @)
+     ,@)
+     @get('dealerHand').on('dealerdone',
+      -> if @get('playerHand').scores()[0] > @get('dealerHand').scores()[0]
+       @trigger 'playerwins'
+      else @trigger 'dealerwins'
+     , @)

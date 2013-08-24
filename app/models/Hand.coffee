@@ -14,7 +14,9 @@ class window.Hand extends Backbone.Collection
 
   dealerHit: ->
     @hit() until @scores()[0] >= 17
-    @trigger 'dealerbust' if @scores()[0] > 21
+    if @scores()[0] > 21 
+    then @trigger 'dealerbust' 
+    else @trigger 'dealerdone'
 
   # Trigger standing event to App to have the deal make its moves
   stand: -> @trigger 'standing'
