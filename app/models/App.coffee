@@ -6,8 +6,12 @@ class window.App extends Backbone.Model
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     @get('playerHand').on('standing', 
-      -> @get('dealerHand').hit()
+      -> @get('dealerHand').dealerHit()
      ,@)
      @get('playerHand').on('busted', 
       -> @trigger 'busted'
-     ,@) 
+     ,@)
+     @get('dealerHand').on('dealerbust',
+      -> if @get('playerHand').scores()[0] <= 21
+           @trigger 'dealerbust'
+    , @)

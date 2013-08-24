@@ -13,8 +13,11 @@ class window.AppView extends Backbone.View
   initialize: -> 
     @render()
     @model.on('busted', @busted)
+    @model.on('dealerbust', @dealerbust)
 
-  busted: -> alert('Busted!')
+  busted: -> alert 'Busted!'
+
+  dealerbust: -> alert 'Dealer busted; you win!'
 
   render: ->
     @$el.children().detach()

@@ -12,6 +12,11 @@ class window.Hand extends Backbone.Collection
       addedCard = true
     @trigger 'busted' if @scores()[0] > 21 && addedCard
 
+  dealerHit: ->
+    @hit() until @scores()[0] >= 17
+    @trigger 'dealerbust' if @scores()[0] > 21
+
+  # Trigger standing event to App to have the deal make its moves
   stand: -> @trigger 'standing'
 
   busted: -> 
