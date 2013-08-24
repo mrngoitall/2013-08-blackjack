@@ -1,3 +1,7 @@
+body {
+  background-image: url('../lib/cardtable.jpg');
+}
+
 .card {
   float: left;
   border: solid 1px black;
@@ -13,4 +17,23 @@
 
 .hand {
   overflow: auto;
+}
+
+.player-status {
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: .5em;
+  width: 90%;
+  opacity: .85;
+  background: #fff0bf;
+  border: 1px solid #DDD;
+}
+
+.winner {
+  background: #e5fde4;
+}
+
+.loser {
+  background: #ffd9d9;
 }
