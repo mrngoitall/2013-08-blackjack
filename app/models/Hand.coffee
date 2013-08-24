@@ -3,7 +3,6 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer) ->
-    @on('busted', @busted)
 
   hit: -> 
     limit = if @isDealer then 17 else 20
@@ -11,17 +10,16 @@ class window.Hand extends Backbone.Collection
       @add(@deck.pop()).last() 
       addedCard = true
     @trigger 'busted' if @scores()[0] > 21 && addedCard
+    @last
 
   dealerHit: ->
     @hit() until @scores()[0] >= 17
     if @scores()[0] > 21 
-    then @trigger 'dealerbust' 
-    else @trigger 'dealerdone'
+    then @trigger 'dealerBust' 
+    else @trigger 'dealerDone'
 
   # Trigger standing event to App to have the deal make its moves
-  stand: -> @trigger 'standing'
-
-  busted: -> 
+  stand: -> @trigger 'stand'
 
   scores: ->
     # The scores are an array of potential scores.
