@@ -50,11 +50,11 @@ class window.App extends Backbone.Model
 
   gameOver: ->
     @set 'playing', false
-    if @get 'winner' is 'player'
+    if @get('winner') is 'player'
       @set 'playerScore',@get('playerScore')+1
-    else if @get 'winner' is 'dealer'
+    else if @get('winner') is 'dealer'
       @set 'dealerScore',@get('dealerScore')+1
-    else if @get 'winner' is 'tie'
+    else if @get('winner') is 'tie'
       @set 'playerScore',@get('playerScore')+1
       @set 'dealerScore',@get('dealerScore')+1
     @trigger 'gameOver'

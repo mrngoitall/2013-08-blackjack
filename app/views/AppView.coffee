@@ -30,9 +30,18 @@ class window.AppView extends Backbone.View
     @$el.children().detach()
     @$el.html @template()
     @$('.player-status').html @model.get 'status'
+    @$('.player-status').attr('style', 
+      if @model.get('winner') is 'player'
+      then 'background: #e5fde4;'
+      else if @model.get('winner') is 'dealer'
+      then 'background: #ffd9d9;'
+      else 'background: #fff0bf;'
+    )
     if !@model.get('playing')
       @$('.hit-button').attr('hidden',true)
       @$('.stand-button').attr('hidden',true)
       @$('.new-game-button').attr('hidden',false)
+    @$('.dealer-score').html 'Dealer Score: '+@model.get 'dealerScore'
+    @$('.player-score').html 'Player Score: '+@model.get 'playerScore'
     @$('.player-hand-container').html new HandView(collection: @model.get 'playerHand').el
     @$('.dealer-hand-container').html new HandView(collection: @model.get 'dealerHand').el
