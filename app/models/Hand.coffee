@@ -10,6 +10,7 @@ class window.Hand extends Backbone.Collection
       @add(@deck.pop()).last() 
       addedCard = true
     @trigger 'busted' if @scores() > 21 && addedCard
+    @trigger 'stand' if @scores() is 21
     @last
 
   dealerHit: ->
