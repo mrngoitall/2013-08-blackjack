@@ -3,18 +3,18 @@ class window.App extends Backbone.Model
 
   initialize: ->
     @newGame()
-    @get('playerHand').on('stand',@stand,@)
-    @get('playerHand').on('busted',@busted,@)
-    @get('dealerHand').on('dealerBust',@dealerBust,@)
-    @get('dealerHand').on('dealerDone',@dealerDone, @)
     @on('newGame',@newGame, @)
 
   newGame: ->
-    console.log 'new game'
+    @set 'playing', true
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
     @set 'status', 'Make. Your. Move.'
+    @get('playerHand').on('stand',@stand,@)
+    @get('playerHand').on('busted',@busted,@)
+    @get('dealerHand').on('dealerBust',@dealerBust,@)
+    @get('dealerHand').on('dealerDone',@dealerDone, @)
 
   stand: ->
     @get('dealerHand').at(0).flip()
@@ -22,21 +22,24 @@ class window.App extends Backbone.Model
 
   busted: ->
     @set 'status','Bust. Dealer wins!'
-    @trigger 'gameOver'
+    @gameOver()
 
   dealerBust: ->
     if @get('playerHand').scores() <= 21
       @set 'status','Dealer bust. You win!'
-      @trigger 'gameOver'
+      @gameOver()
 
   dealerDone: ->
     if @get('playerHand').scores() > @get('dealerHand').scores()
      @set 'status','You win! That rabbit foot sure is useful.'
-     @trigger 'gameOver'
+     @gameOver()
     else if @get('playerHand').scores() < @get('dealerHand').scores()
       @set 'status','Dealer wins! :('
-      @trigger 'gameOver'
+      @gameOver()
     else 
       @set 'status',"It's a tie! How boring."
-      @trigger 'gameOver'
+      @gameOver()
 
+  gameOver: ->
+    @set 'playing', false
+    @trigger 'gameOver'

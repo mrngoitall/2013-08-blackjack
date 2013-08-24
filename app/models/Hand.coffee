@@ -5,7 +5,7 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
 
   hit: -> 
-    limit = if @isDealer then 17 else 20
+    limit = if @isDealer then 17 else 22
     if @scores() <= limit
       @add(@deck.pop()).last() 
       addedCard = true
