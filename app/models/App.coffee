@@ -7,4 +7,7 @@ class window.App extends Backbone.Model
     @set 'dealerHand', deck.dealDealer()
     @get('playerHand').on('standing', 
       -> @get('dealerHand').hit()
+     ,@)
+     @get('playerHand').on('busted', 
+      -> @trigger 'busted'
      ,@) 
