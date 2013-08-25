@@ -6,7 +6,7 @@ class window.Deck extends Backbone.Collection
     @add _(_.range(1, 53)).shuffle().map (card) ->
       new Card
         rank: card % 13
-        suit: Math.floor(card / 13)
+        suit: Math.min(Math.floor(card / 13),3)
 
   dealPlayer: -> hand = new Hand [ @pop(), @pop() ], @, false
 
